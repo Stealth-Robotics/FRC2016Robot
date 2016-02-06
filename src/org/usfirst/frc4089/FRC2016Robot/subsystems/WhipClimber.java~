@@ -15,7 +15,7 @@ import org.usfirst.frc4089.FRC2016Robot.RobotMap;
 import org.usfirst.frc4089.FRC2016Robot.commands.*;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 
@@ -46,6 +46,18 @@ public class WhipClimber extends Subsystem {
 
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
+    }
+    
+    public void Climb(double speed) {
+    	winchMotor.set(speed);
+    }
+    
+    public void KillMotor() {
+    	Climb(0);
+    }
+    
+    public void Deploy(){
+    	dSLatch.set(Value.kForward);
     }
 }
 
