@@ -1,0 +1,47 @@
+Autonomous
+
+Defences
+1 - Low bar
+2 - Moat & 					Ramparts
+3 - Rock wall & 			Rough Terrain
+4 - Portcullis & 			Cheval de Frise (Only ChevyChase)
+5 - Drawbridge & 			Sally Port (neither)
+
+
+
+ Slot Priority
+1 - slot 1
+2 - slot 3
+3 - slot 4
+4 - slot 2
+5 - slot 5
+
+Overall priority
+1 - Low bar in slot 1
+2 - Moat/Rampart in slot 3 or 4
+3 - Rock wall/Rough terrain in slot 3 or 4
+4 - Moat/Rampart in slot 2
+5 - Rock wall/rough terrain in slot 2
+6 - ChevyChase in slot 3 or 4
+7 - ChevyChase in slot 2
+8 - Moat/Rampart in slot 5
+9 - Rock wall/rough terrain in slot 5
+10 - ChevyChase in slot 5
+11-X - Any other obstacle in any slot
+ 
+Tower
+	Center
+	Left
+	Right
+	 
+ Options
+ Slot 1 = Left Tower = drive to alignment line = drive additional distance = turn 45
+ Slot 2 = Left Tower = drive to alignment line = drive additional distance = turn 30 right
+ Slot 3 = Center = Drive to alignment line = slightly turn right
+ Slot 4 = Center = Drive to alignment line = slightly turn left
+ Slot 5 = Right = Drive to alignment line = 
+										1- center is open = turn 90 left = drive distance = turn 90 right
+										2- center not open = Drive additional fixed distance = turn 30 ish left
+										
+ 
+ 
