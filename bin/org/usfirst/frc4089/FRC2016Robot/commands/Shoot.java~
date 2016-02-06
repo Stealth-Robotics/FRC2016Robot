@@ -44,7 +44,7 @@ public class Shoot extends Command {
     protected void execute() {
     	Robot.spinShooter.Spin(1);
     }
-
+   
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

@@ -45,5 +45,15 @@ public class Collector extends Subsystem {
         // Set the default command for a subsystem here.
         // setDefaultCommand(new MySpecialCommand());
     }
+    
+    public void collect()
+    {
+    	mCollector.set(1.0);
+    }
+    
+    public void endCollection()
+    {
+    	mCollector.set(0);
+    }
 }
 
