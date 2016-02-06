@@ -69,6 +69,19 @@ public class DriveTrain extends Subsystem {
     	rDrive.arcadeDrive(pow, turn);
     }
     
+    public void DriveAutoAlign()
+    {
+    	double l = 0.5, r = 0.5;
+    	if(IsLeftLimitTriggered()) l = 0;
+    	if(IsRightLimitTriggered()) r = 0;
+    	rDrive.setLeftRightMotorOutputs(l, r);
+    }
+    
+    public void DriveAutoDist(double distance)
+    {
+    	//drive until encoder - need to add
+    }
+    
     public void ToggleShifters()
     {
     	Value shift = leftDriveShifter.get() == Value.kForward ? Value.kReverse : Value.kForward;
