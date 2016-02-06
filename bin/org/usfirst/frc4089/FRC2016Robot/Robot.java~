@@ -112,7 +112,6 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
-    	driveTrain.Drive(oi.getDriveJS());
     	SmartDashboard.putNumber("MotorArraySize", spinShooter.getLeftRPMs());
         Scheduler.getInstance().run();
     }

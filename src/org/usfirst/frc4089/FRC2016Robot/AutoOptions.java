@@ -5,11 +5,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class AutoOptions {
 	public static final String[] Options = new String[] {
     		"Low Bar 1",
-    		"Moat/Rampart 3/4",
-    		"Rock Wall/Rough Terrain 3/4",
+    		"Moat/Rampart 3",
+    		"Moat/Rampart 4",
+    		"Rock Wall/Rough Terrain 3",
+    		"Rock Wall/Rough Terrain 3",
     		"Moat/Rampart 2",
     		"Rock Wall/Rough Terrain 2",
-    		"ChevyChase 3/4",
+    		"ChevyChase 3",
+    		"ChevyChase 4",
     		"ChevyChase 2",
     		"Moat/Rampart 5",
     		"Rock Wall/Rough Terrain 5",
@@ -17,7 +20,7 @@ public class AutoOptions {
     		"Any Other (Disabled)"};
 	
 	public static final Command[] AssociatedCommands = new Command[] {
-		//TODO add commands	
+		//Add commands
 	};
 	
 	public Command getAutoCommandFromString(String[] chosen)
