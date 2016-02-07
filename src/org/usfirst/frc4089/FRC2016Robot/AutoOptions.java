@@ -8,7 +8,7 @@ public class AutoOptions {
     		"Moat/Rampart 3",
     		"Moat/Rampart 4",
     		"Rock Wall/Rough Terrain 3",
-    		"Rock Wall/Rough Terrain 3",
+    		"Rock Wall/Rough Terrain 4",
     		"Moat/Rampart 2",
     		"Rock Wall/Rough Terrain 2",
     		"ChevyChase 3",
