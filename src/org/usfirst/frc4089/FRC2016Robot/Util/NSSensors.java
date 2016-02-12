@@ -1,4 +1,4 @@
-package org.usfirst.frc4089.FRC2016Robot.NonStandardSensors;
+package org.usfirst.frc4089.FRC2016Robot.Util;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Counter;
