@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc4089.FRC2016Robot.Util.StringArraySendable;
 import org.usfirst.frc4089.FRC2016Robot.Util.VisionProcessing;
 import org.usfirst.frc4089.FRC2016Robot.commands.*;
 import org.usfirst.frc4089.FRC2016Robot.subsystems.*;
@@ -84,7 +85,7 @@ public class Robot extends IterativeRobot {
     public void disabledInit(){
     	driveTrain.InitShifters();
     	catapultShooter.Retract();
-    	if(SmartDashboard.getBoolean("VPDispose"))
+    	if(SmartDashboard.getBoolean("VPDispose", false))
     	{
     		VisionProcessing.VPDispose();
     	}
