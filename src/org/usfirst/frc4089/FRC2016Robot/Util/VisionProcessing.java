@@ -19,11 +19,9 @@ public class VisionProcessing {
 	static NIVision.Range HUE_RANGE = new NIVision.Range(8, 168);	//Default hue range for tape
 	static NIVision.Range SAT_RANGE = new NIVision.Range(21, 255);	//Default saturation range for tape
 	static NIVision.Range VAL_RANGE = new NIVision.Range(229, 255);	//Default value range for tape
-	static float MIN_PARTICLE_AREA = 0.12f;
-	static float LENS_ANGLE = 60;
+	static float MIN_PARTICLE_AREA = 0.25f;
+	public static float LENS_ANGLE = 60;
 	
-	static ClassifierSession towerClassifierSession;
-	static ReadClassifierFileResult result;
 	static NIVision.ParticleFilterCriteria2 criteria[] = new NIVision.ParticleFilterCriteria2[1];
 	static NIVision.ParticleFilterOptions2 filterOptions = new NIVision.ParticleFilterOptions2(0,0,1,1);
 	
@@ -41,11 +39,6 @@ public class VisionProcessing {
         NIVision.IMAQdxConfigureGrab(session);
 
 		NIVision.IMAQdxStartAcquisition(session);
-		
-		towerClassifierSession = NIVision.imaqCreateClassifier(ClassifierType.CLASSIFIER_PARTICLE);
-		
-		result = NIVision.imaqReadClassifierFile(towerClassifierSession, "VISION/Tower Target.clf",
-				ReadClassifierFileMode.CLASSIFIER_READ_ALL, "Tower classification");
 		
 		exists = true;
 	}
@@ -111,35 +104,21 @@ public class VisionProcessing {
 				m.BoundingRectWidth = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_WIDTH);
 				m.BoundingRectTop = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_TOP);
 				m.BoundingRectHeight = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_HEIGHT);
+				m.AspectRatio = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_RATIO_OF_EQUIVALENT_RECT_SIDES);
 				m.BoundingRectCoverageArea = m.TotalParticleArea / 
 						(m.BoundingRectWidth * m.BoundingRectHeight);
 				visionMeas.addElement(m);
 			}
 			visionMeas.sort(null);
 			
-			SmartDashboard.putNumber("RPMs", visionMeas.size());
-			
-			for(int j = 0; j < 3 && j < visionMeas.size(); j++)
+			ScoreCollection scores = new ScoreCollection();
+			for(int j = 0; j < numParticles; j++)
 			{
 				VisionParticleMeasurements vm = visionMeas.elementAt(j);
-				NIVision.Rect roiRect = new NIVision.Rect((int)vm.BoundingRectTop,
-					(int)vm.BoundingRectLeft,
-					(int)vm.BoundingRectWidth,
-					(int)vm.BoundingRectHeight);
-				ROI roi = NIVision.imaqCreateROI();
-				NIVision.imaqAddRectContour(roi, roiRect);
-				ClassifierReport rept = NIVision.imaqClassify(binaryFrame, towerClassifierSession, roi,
-						new double[0]);
-				if(j == 0)
-				{
-					ClassifiedScore sc = new ClassifiedScore();
-					sc.BoundingRectLocation = roiRect;
-					sc.IDScore = rept.identificationScore;
-					sc.ClassificationScore = rept.classificationScore;
-					sc.ClassName = rept.bestClassName;
-					SmartDashboard.putData("PrimaryTower", sc);
-				}
+				ClassifiedScore sc = new ClassifiedScore(vm);
+				scores.add(sc);
 			}
+			scores.Send();
 		}
 	}
 	

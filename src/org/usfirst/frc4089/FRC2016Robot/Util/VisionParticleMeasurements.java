@@ -11,6 +11,7 @@ public class VisionParticleMeasurements implements Comparator<VisionParticleMeas
 	public double BoundingRectHeight;
 	public double ImageCoverageArea;
 	public double BoundingRectCoverageArea;
+	public double AspectRatio;
 	
 	@Override
 	public int compareTo(VisionParticleMeasurements that) {
