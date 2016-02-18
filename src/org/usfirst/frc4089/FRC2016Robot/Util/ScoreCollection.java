@@ -27,14 +27,24 @@ public class ScoreCollection implements Comparator<ClassifiedScore> {
 	
 	public void Send()
 	{
-		//Filter(75, 75);
-		for(int i = 0; i < scores.size(); i++)
+		Filter(45, 45, 60, 0);
+		scores.sort(this);
+		for(int i = 0; i < 3; i++)
 		{
-			SmartDashboard.putData("Towers/" + i, scores.get(i));
+			if(i < scores.size())
+			{
+				SmartDashboard.putData("Towers/" + i, scores.get(i));
+			}
+			else
+			{
+				ClassifiedScore dummy = new ClassifiedScore();
+				SmartDashboard.putData("Towers/" + i, dummy);
+			}
 		}
 	}
 	
-	private void Filter(double arThreshold, double caThreshold)
+	private void Filter(double arThreshold, double caThreshold,
+			double skewThreshold, double pdThreshold)
 	{
 		scores.sort(this);
 		Iterator<ClassifiedScore> it = scores.iterator();
@@ -42,7 +52,9 @@ public class ScoreCollection implements Comparator<ClassifiedScore> {
 		{
 			ClassifiedScore cs = it.next();
 			if(cs.AspectRatioScore < arThreshold ||
-					cs.CoverageAreaScore < caThreshold)
+					cs.CoverageAreaScore < caThreshold ||
+					cs.SkewnessScore < skewThreshold ||
+					cs.PerimDiffScore < pdThreshold)
 			{
 				it.remove();
 			}
@@ -52,13 +64,18 @@ public class ScoreCollection implements Comparator<ClassifiedScore> {
 	@Override
 	public int compare(ClassifiedScore o1, ClassifiedScore o2) {
 		// TODO Auto-generated method stub
-		if(o1.AspectRatioScore == o2.AspectRatioScore)
+		//sort first by aspect ratio, then coverage area, then skewness
+		if(o1.AspectRatioScore != o2.AspectRatioScore)
+		{
+			return (int)(o2.AspectRatioScore - o1.AspectRatioScore);
+		}
+		else if(o1.CoverageAreaScore != o2.CoverageAreaScore)
 		{
 			return (int)(o2.CoverageAreaScore - o1.CoverageAreaScore);
 		}
 		else
 		{
-			return (int)(o2.AspectRatioScore - o1.AspectRatioScore);
+			return (int)(o2.SkewnessScore - o1.SkewnessScore);
 		}
 	}
 }

@@ -19,7 +19,7 @@ public class VisionProcessing {
 	static NIVision.Range HUE_RANGE = new NIVision.Range(8, 168);	//Default hue range for tape
 	static NIVision.Range SAT_RANGE = new NIVision.Range(21, 255);	//Default saturation range for tape
 	static NIVision.Range VAL_RANGE = new NIVision.Range(229, 255);	//Default value range for tape
-	static float MIN_PARTICLE_AREA = 0.25f;
+	static float MIN_PARTICLE_AREA = 0.2f;
 	public static float LENS_ANGLE = 60;
 	
 	static NIVision.ParticleFilterCriteria2 criteria[] = new NIVision.ParticleFilterCriteria2[1];
@@ -72,6 +72,7 @@ public class VisionProcessing {
 		//take measurements
 		GetImageSizeResult maskSize = NIVision.imaqGetImageSize(masked);
 		GetImageSizeResult frameSize = NIVision.imaqGetImageSize(frame);
+		SmartDashboard.putNumber("TotalRes", frameSize.height + frameSize.width);
 		//scale masked image down to 1/5
 		NIVision.imaqScale(masked, masked, 5, 5, ScalingMode.SCALE_SMALLER,
 				new NIVision.Rect(0, 0,
@@ -104,7 +105,11 @@ public class VisionProcessing {
 				m.BoundingRectWidth = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_WIDTH);
 				m.BoundingRectTop = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_TOP);
 				m.BoundingRectHeight = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_BOUNDING_RECT_HEIGHT);
-				m.AspectRatio = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_RATIO_OF_EQUIVALENT_RECT_SIDES);
+				m.RelativeSkewness = 1 - (NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_PARTICLE_AND_HOLES_AREA) /
+						(m.BoundingRectWidth * m.BoundingRectHeight));
+				m.NetPerimeterDistance = NIVision.imaqMeasureParticle(binaryFrame, i, 0, MeasurementType.MT_PERIMETER)
+						- 2 * (m.BoundingRectWidth + m.BoundingRectHeight);
+				m.AspectRatio = m.BoundingRectWidth / m.BoundingRectHeight;				
 				m.BoundingRectCoverageArea = m.TotalParticleArea / 
 						(m.BoundingRectWidth * m.BoundingRectHeight);
 				visionMeas.addElement(m);
