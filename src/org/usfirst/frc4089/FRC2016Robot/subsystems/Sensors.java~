@@ -12,7 +12,7 @@
 package org.usfirst.frc4089.FRC2016Robot.subsystems;
 
 import org.usfirst.frc4089.FRC2016Robot.RobotMap;
-import org.usfirst.frc4089.FRC2016Robot.NonStandardSensors.NSSensors;
+import org.usfirst.frc4089.FRC2016Robot.Util.NSSensors;
 import org.usfirst.frc4089.FRC2016Robot.commands.*;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.DigitalInput;

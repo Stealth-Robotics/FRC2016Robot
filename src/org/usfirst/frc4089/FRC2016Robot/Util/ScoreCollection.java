@@ -25,6 +25,26 @@ public class ScoreCollection implements Comparator<ClassifiedScore> {
 		scores.add(cs);
 	}
 	
+	public ClassifiedScore getBestTarget()
+	{
+		if(scores.size() == 0) return null;
+		ClassifiedScore ret = null;
+		for(int i = 0; i < scores.size(); i++)
+		{
+			ClassifiedScore sc = scores.get(i);
+			if(ret == null || ret.IsDummy)
+			{
+				ret = sc;
+				continue;
+			}
+			if(Math.abs(ret.AimingPos.x) > Math.abs(sc.AimingPos.x))
+			{
+				ret = sc;
+			}
+		}
+		return ret;
+	}
+	
 	public void Send()
 	{
 		Filter(45, 45, 60, 0);

@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class VisionProcessing {
 
+	public static ScoreCollection scores;
+	
 	static int session;
 	static Image frame;
 	static Image masked;
@@ -116,7 +118,7 @@ public class VisionProcessing {
 			}
 			visionMeas.sort(null);
 			
-			ScoreCollection scores = new ScoreCollection();
+			scores = new ScoreCollection();
 			for(int j = 0; j < numParticles; j++)
 			{
 				VisionParticleMeasurements vm = visionMeas.elementAt(j);

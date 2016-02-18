@@ -72,7 +72,8 @@ public class DriveTrain extends Subsystem {
     
     public void DriveAutoAlign()
     {
-    	double l = 0.5, r = 0.5;
+    	double l = 0.75, r = 0.75;
+    	ShiftLow();
     	if(IsLeftLimitTriggered()) l = 0;
     	if(IsRightLimitTriggered()) r = 0;
     	rDrive.setLeftRightMotorOutputs(l, r);
@@ -88,6 +89,18 @@ public class DriveTrain extends Subsystem {
     	Value shift = leftDriveShifter.get() == Value.kForward ? Value.kReverse : Value.kForward;
     	leftDriveShifter.set(shift);
     	rightDriveShifter.set(shift);
+    }
+    
+    public void ShiftLow()
+    {
+    	leftDriveShifter.set(Value.kReverse);
+    	rightDriveShifter.set(Value.kReverse);
+    }
+    
+    public void ShiftHigh()
+    {
+    	leftDriveShifter.set(Value.kForward);
+    	rightDriveShifter.set(Value.kForward);
     }
     
     public void InitShifters()
