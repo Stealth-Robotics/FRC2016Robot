@@ -1,16 +1,22 @@
 package org.usfirst.frc4089.FRC2016Robot.Util;
 
 import java.util.Vector;
+import java.util.concurrent.atomic.AtomicReference;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.*;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.vision.USBCamera;
 
 public class VisionProcessing {
 
-	public static ScoreCollection scores;
+	public static AtomicReference<ScoreCollection> scores;
+	public static final int ResX = 320;
+	public static final int ResY = 240;
+	
+	static USBCamera cam0;
 	
 	static int session;
 	static Image frame;
@@ -30,17 +36,22 @@ public class VisionProcessing {
 	static boolean exists = false;
 	
 	public static void VPInit()
-	{
+	{		
 		frame = NIVision.imaqCreateImage(ImageType.IMAGE_RGB, 0);
 		masked = NIVision.imaqCreateImage(ImageType.IMAGE_RGB, 0);
 		binaryFrame = NIVision.imaqCreateImage(ImageType.IMAGE_U8, 0);
 		criteria[0] = new NIVision.ParticleFilterCriteria2(NIVision.MeasurementType.MT_AREA_BY_IMAGE_AREA, MIN_PARTICLE_AREA, 100.0, 0, 0);
 		
-		session = NIVision.IMAQdxOpenCamera("cam0",
+		/*session = NIVision.IMAQdxOpenCamera("cam0",
                 NIVision.IMAQdxCameraControlMode.CameraControlModeController);
         NIVision.IMAQdxConfigureGrab(session);
 
-		NIVision.IMAQdxStartAcquisition(session);
+		NIVision.IMAQdxStartAcquisition(session);*/
+		
+		cam0 = new USBCamera("cam0");
+		cam0.openCamera();
+		cam0.startCapture();
+		cam0.setSize(ResX, ResY);
 		
 		exists = true;
 	}
@@ -51,7 +62,8 @@ public class VisionProcessing {
 		
 		//read file in from disk. For this example to run you need to copy image20.jpg from the SampleImages folder to the
 		//directory shown below using FTP or SFTP: http://wpilib.screenstepslive.com/s/4485/m/24166/l/282299-roborio-ftp
-		NIVision.IMAQdxGrab(session, frame, 1);
+		//NIVision.IMAQdxGrab(session, frame, 1);	
+		cam0.getImage(frame);
 
 		//Update threshold values from SmartDashboard. For performance reasons it is recommended to remove this after calibration is finished.
 		HUE_RANGE.minValue = (int)SmartDashboard.getNumber("Hue min", HUE_RANGE.minValue);
@@ -74,7 +86,7 @@ public class VisionProcessing {
 		//take measurements
 		GetImageSizeResult maskSize = NIVision.imaqGetImageSize(masked);
 		GetImageSizeResult frameSize = NIVision.imaqGetImageSize(frame);
-		SmartDashboard.putNumber("TotalRes", frameSize.height + frameSize.width);
+		SmartDashboard.putString("Resolution", frameSize.width + "x" + frameSize.height);
 		//scale masked image down to 1/5
 		NIVision.imaqScale(masked, masked, 5, 5, ScalingMode.SCALE_SMALLER,
 				new NIVision.Rect(0, 0,
@@ -118,14 +130,22 @@ public class VisionProcessing {
 			}
 			visionMeas.sort(null);
 			
-			scores = new ScoreCollection();
+			ScoreCollection _scores = new ScoreCollection();
 			for(int j = 0; j < numParticles; j++)
 			{
 				VisionParticleMeasurements vm = visionMeas.elementAt(j);
 				ClassifiedScore sc = new ClassifiedScore(vm);
-				scores.add(sc);
+				_scores.add(sc);
 			}
-			scores.Send();
+			_scores.Send();
+			if(scores == null)
+			{
+				scores = new AtomicReference<ScoreCollection>(_scores);
+			}
+			else
+			{
+				scores.set(_scores);
+			}
 		}
 	}
 	
@@ -133,8 +153,10 @@ public class VisionProcessing {
 	{
 		if(exists)
 		{
-			NIVision.IMAQdxStopAcquisition(session);
-			NIVision.IMAQdxCloseCamera(session);
+			/*NIVision.IMAQdxStopAcquisition(session);
+			NIVision.IMAQdxCloseCamera(session);*/
+			cam0.stopCapture();
+			cam0.closeCamera();
 			exists = false;
 		}
 	}

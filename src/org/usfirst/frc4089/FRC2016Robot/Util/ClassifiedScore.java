@@ -110,8 +110,8 @@ public class ClassifiedScore implements Sendable {
 	
 	public PointFloat GetAimingPos()
 	{
-		double resX = 640;
-		double resY = 480; //TODO change if we can control res
+		double resX = VisionProcessing.ResX;
+		double resY = VisionProcessing.ResY;
 		double px = BoundingRectLocation.left + BoundingRectLocation.width / 2;
 		double py = BoundingRectLocation.top + BoundingRectLocation.height / 4;
 		double x = (px - resX / 2) / (resX / 2);
@@ -121,8 +121,8 @@ public class ClassifiedScore implements Sendable {
 	
 	public double GetDist()
 	{
-		double resX = 640;
-		double resY = 480; //TODO change if we can control res
+		double resX = VisionProcessing.ResX;
+		double resY = VisionProcessing.ResY;
 		double numTargetWidthsInFrame = resX / BoundingRectLocation.width;
 		double inchesWidth = 20 * numTargetWidthsInFrame / 2;
 		//Pi/360 because lens angle/2
