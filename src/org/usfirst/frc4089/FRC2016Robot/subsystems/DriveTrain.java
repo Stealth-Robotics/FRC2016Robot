@@ -70,7 +70,7 @@ public class DriveTrain extends Subsystem {
     	rDrive.arcadeDrive(pow, turn);
     }
     
-    public void DriveAutoAlign()
+    public void DriveToLine()
     {
     	double l = 0.75, r = 0.75;
     	ShiftLow();
@@ -79,7 +79,7 @@ public class DriveTrain extends Subsystem {
     	rDrive.setLeftRightMotorOutputs(l, r);
     }
     
-    public void DriveAutoDist(double distance)
+    public void DriveToDist(double distance)
     {
     	//drive until encoder - need to add
     }
@@ -105,8 +105,7 @@ public class DriveTrain extends Subsystem {
     
     public void InitShifters()
     {
-    	leftDriveShifter.set(Value.kReverse);
-    	rightDriveShifter.set(Value.kReverse);
+    	ShiftHigh();
     }
     
     public boolean IsLeftLimitTriggered()
