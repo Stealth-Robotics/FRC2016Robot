@@ -38,23 +38,29 @@ public class Rotate extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.sensors.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.driveTrain.Rotate(0.75);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	boolean areSignsEqual = Math.signum(m_degreeAngle) == Math.signum(Robot.sensors.getAngle());
+    	boolean absComp = Math.abs(Robot.sensors.getAngle()) >= Math.abs(m_degreeAngle);
+        return areSignsEqual && absComp;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.driveTrain.Drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

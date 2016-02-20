@@ -57,6 +57,16 @@ public class Sensors extends Subsystem {
     	return new double[] { acc.getX(), acc.getY(), acc.getZ() };
     }
     
+    public void resetGyro()
+    {
+    	analogGyro1.reset();
+    }
+    
+    public void calGyro()
+    {
+    	analogGyro1.calibrate();
+    }
+    
     public double getAngle()
     {
     	return analogGyro1.getAngle() % 360;

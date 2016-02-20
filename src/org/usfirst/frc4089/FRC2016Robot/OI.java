@@ -60,6 +60,7 @@ public class OI {
     public JoystickButton climbDownBtn;
     public JoystickButton shooterRaiser;
     public JoystickButton shooterLowerer;
+    public JoystickButton spin;
     public Joystick driveJS;
     public JoystickButton collectorExtender;
     public JoystickButton collectorRetractor;
@@ -84,6 +85,8 @@ public class OI {
         collectorExtender.whenPressed(new CollectorExtend());
         driveJS = new Joystick(0);
         
+        spin = new JoystickButton(driveJS, 8);
+        spin.whileHeld(new Shoot());
         shooterLowerer = new JoystickButton(driveJS, 12);
         shooterLowerer.whenPressed(new ShooterLower());
         shooterRaiser = new JoystickButton(driveJS, 10);
@@ -95,7 +98,7 @@ public class OI {
         extendSkyPoleBtn = new JoystickButton(driveJS, 7);
         extendSkyPoleBtn.whenPressed(new ClimberExtend());
         trigger = new JoystickButton(driveJS, 1);
-        trigger.whileHeld(new Shoot());
+        trigger.whenPressed(new AutoShoot());
         visionAlign = new JoystickButton(driveJS, 3);
         visionAlign.whenPressed(new AlignToVision());
         shifter = new JoystickButton(driveJS, 2);

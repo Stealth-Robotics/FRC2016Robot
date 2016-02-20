@@ -103,6 +103,12 @@ public class DriveTrain extends Subsystem {
     	return leftPow == 0 && rightPow == 0;
     }
     
+    public void Rotate(double rotPow)
+    {
+    	ShiftLow();
+    	Drive(rotPow, 0);
+    }
+    
     public void ToggleShifters()
     {
     	boolean shift = driveShifter.get();
