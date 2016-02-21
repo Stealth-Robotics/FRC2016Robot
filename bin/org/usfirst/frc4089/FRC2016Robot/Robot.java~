@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc4089.FRC2016Robot.Util.AutoOptions;
 import org.usfirst.frc4089.FRC2016Robot.Util.StringArraySendable;
 import org.usfirst.frc4089.FRC2016Robot.Util.VisionProcessing;
 import org.usfirst.frc4089.FRC2016Robot.Util.VisionRunnable;

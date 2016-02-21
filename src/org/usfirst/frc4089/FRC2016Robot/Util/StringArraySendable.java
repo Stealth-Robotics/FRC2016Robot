@@ -1,5 +1,6 @@
 package org.usfirst.frc4089.FRC2016Robot.Util;
 
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.tables.ITable;
 
