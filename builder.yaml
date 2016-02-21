@@ -270,6 +270,22 @@ Children:
           value: '0'
       Base: Solenoid
       Name: RaiseSolenoid
+    - Children: []
+      Properties:
+        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id005
+          default: '0'
+          name: Output Channel (Solenoid)
+          validators: *id006
+          value: '3'
+        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id007
+          default: '0'
+          name: Output PCM (Solenoid)
+          validators: *id008
+          value: '0'
+      Base: Solenoid
+      Name: StringReleaseSol
     Properties:
       Default command parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
@@ -877,7 +893,7 @@ Children:
     Base: Command
     Name: ClimbDown
   - Children: []
-    Properties: &id028
+    Properties: &id026
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -931,12 +947,12 @@ Children:
     Base: Command
     Name: UserDrive
   - Children: []
-    Properties: &id017
+    Properties: &id016
       Parameters: !!robotbuilder.data.properties.ParametersProperty
-        default: &id015 []
+        default: []
         name: Parameters
         validators: null
-        value: *id015
+        value: []
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: DriveTrain}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
@@ -949,7 +965,7 @@ Children:
     Base: Command
     Name: DriveToLine
   - Children: []
-    Properties: &id020
+    Properties: &id019
       Parameters: !!robotbuilder.data.properties.ParametersProperty
         default: []
         name: Parameters
@@ -986,11 +1002,11 @@ Children:
       Commands: !!robotbuilder.data.properties.ListProperty
         default: []
         name: Commands
-        validators: &id023 [List]
+        validators: &id024 [List]
         value:
-        - &id019 !!robotbuilder.data.CommandGroupEntry
-          command: &id039
-            base: &id018
+        - &id018 !!robotbuilder.data.CommandGroupEntry
+          command: &id036
+            base: &id017
               help: A command specifies an action that the robot can perform.
               name: Command
               properties:
@@ -1004,14 +1020,14 @@ Children:
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id016 []
+                default: &id015 []
                 name: Parameter presets
                 validators: null
-                value: *id016
+                value: *id015
               supports: {}
               type: Command
             name: DriveToLine
-            properties: *id017
+            properties: *id016
           hasMatch: true
           order: Sequential
           parameters:
@@ -1020,11 +1036,11 @@ Children:
             validators: null
             value: []
           previous: null
-        - &id021 !!robotbuilder.data.CommandGroupEntry
-          command: &id042
-            base: *id018
+        - &id020 !!robotbuilder.data.CommandGroupEntry
+          command: &id039
+            base: *id017
             name: DriveToDistance
-            properties: &id032
+            properties: &id030
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -1050,12 +1066,12 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: travelDist,
               type: double, value: '0'}
-          previous: *id019
-        - &id022 !!robotbuilder.data.CommandGroupEntry
-          command: &id040
-            base: *id018
+          previous: *id018
+        - &id021 !!robotbuilder.data.CommandGroupEntry
+          command: &id037
+            base: *id017
             name: Rotate
-            properties: *id020
+            properties: *id019
           hasMatch: true
           order: Sequential
           parameters:
@@ -1065,12 +1081,12 @@ Children:
             value:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: degreeAngle,
               type: double, value: '0'}
-          previous: *id021
-        - &id031 !!robotbuilder.data.CommandGroupEntry
-          command: &id045
-            base: *id018
+          previous: *id020
+        - &id029 !!robotbuilder.data.CommandGroupEntry
+          command: &id042
+            base: *id017
             name: AlignToVision
-            properties: &id033
+            properties: &id031
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -1092,9 +1108,9 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id022
+          previous: *id021
         - !!robotbuilder.data.CommandGroupEntry
-          command: &id047
+          command: &id044
             base:
               help: A group of commands set to run together in a prescribed way.
               name: Command Group
@@ -1102,24 +1118,24 @@ Children:
               - !!robotbuilder.data.properties.BooleanProperty {default: true, name: Button on SmartDashboard,
                 validators: null, value: true}
               - !!robotbuilder.data.properties.ListProperty
-                default: &id024 []
+                default: &id022 []
                 name: Commands
-                validators: *id023
-                value: *id024
+                validators: [List]
+                value: *id022
               - !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
                 validators: null
                 value: []
               - !!robotbuilder.data.properties.ParameterSetProperty
-                default: &id025 []
+                default: &id023 []
                 name: Parameter presets
                 validators: null
-                value: *id025
+                value: *id023
               supports: {}
               type: Command
             name: AutoShoot
-            properties: &id037
+            properties: &id035
               Parameters: !!robotbuilder.data.properties.ParametersProperty
                 default: []
                 name: Parameters
@@ -1133,13 +1149,13 @@ Children:
               Commands: !!robotbuilder.data.properties.ListProperty
                 default: []
                 name: Commands
-                validators: *id023
+                validators: *id024
                 value:
-                - &id027 !!robotbuilder.data.CommandGroupEntry
+                - &id025 !!robotbuilder.data.CommandGroupEntry
                   command:
-                    base: *id018
+                    base: *id017
                     name: ShooterRaise
-                    properties: &id035
+                    properties: &id033
                       Parameters: !!robotbuilder.data.properties.ParametersProperty
                         default: []
                         name: Parameters
@@ -1164,11 +1180,11 @@ Children:
                     validators: null
                     value: []
                   previous: null
-                - &id029 !!robotbuilder.data.CommandGroupEntry
+                - &id027 !!robotbuilder.data.CommandGroupEntry
                   command:
-                    base: *id018
+                    base: *id017
                     name: PusherGoToAngle
-                    properties: &id050
+                    properties: &id046
                       Parameters: !!robotbuilder.data.properties.ParametersProperty
                         default: []
                         name: Parameters
@@ -1180,10 +1196,10 @@ Children:
                         default: None, name: Requires, type: Subsystem, validators: null,
                         value: Pusher}
                       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                        default: &id026 []
+                        default: []
                         name: Parameter presets
                         validators: null
-                        value: *id026
+                        value: []
                       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                         default: true, name: Button on SmartDashboard, validators: null,
                         value: true}
@@ -1196,12 +1212,12 @@ Children:
                     value:
                     - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
                       type: double, value: '0'}
-                  previous: *id027
+                  previous: *id025
                 - !!robotbuilder.data.CommandGroupEntry
                   command:
-                    base: *id018
+                    base: *id017
                     name: Shoot
-                    properties: *id028
+                    properties: *id026
                   hasMatch: true
                   order: Parallel
                   parameters:
@@ -1209,12 +1225,12 @@ Children:
                     name: ParametersProperty
                     validators: null
                     value: []
-                  previous: *id029
-                - &id030 !!robotbuilder.data.CommandGroupEntry
+                  previous: *id027
+                - &id028 !!robotbuilder.data.CommandGroupEntry
                   command:
-                    base: *id018
+                    base: *id017
                     name: CollectorRetract
-                    properties: &id034
+                    properties: &id032
                       Parameters: !!robotbuilder.data.properties.ParametersProperty
                         default: []
                         name: Parameters
@@ -1242,12 +1258,12 @@ Children:
                     value:
                     - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: shouldStage,
                       type: boolean, value: 'false'}
-                  previous: *id029
+                  previous: *id027
                 - !!robotbuilder.data.CommandGroupEntry
                   command:
-                    base: *id018
+                    base: *id017
                     name: ShooterLower
-                    properties: &id036
+                    properties: &id034
                       Parameters: !!robotbuilder.data.properties.ParametersProperty
                         default: []
                         name: Parameters
@@ -1271,7 +1287,7 @@ Children:
                     name: ParametersProperty
                     validators: null
                     value: []
-                  previous: *id030
+                  previous: *id028
               Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
                 default: true, name: Button on SmartDashboard, validators: null, value: true}
           hasMatch: true
@@ -1281,17 +1297,17 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id031
+          previous: *id029
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: AutoLowBar1
   - Children: []
-    Properties: *id032
+    Properties: *id030
     Base: Command
     Name: DriveToDistance
   - Children: []
-    Properties: *id033
+    Properties: *id031
     Base: Command
     Name: AlignToVision
   - Children: []
@@ -1331,15 +1347,15 @@ Children:
     Base: Command
     Name: CollectorExtend
   - Children: []
-    Properties: *id034
+    Properties: *id032
     Base: Command
     Name: CollectorRetract
   - Children: []
-    Properties: *id035
+    Properties: *id033
     Base: Command
     Name: ShooterRaise
   - Children: []
-    Properties: *id036
+    Properties: *id034
     Base: Command
     Name: ShooterLower
   - Children: []
@@ -1415,7 +1431,7 @@ Children:
     Base: Command
     Name: ClimberExtend
   - Children: []
-    Properties: *id037
+    Properties: *id035
     Base: Command Group
     Name: AutoShoot
   - Children: []
@@ -1427,14 +1443,17 @@ Children:
         value:
         - !!robotbuilder.data.properties.ParameterDescriptor {name: isSlot4, type: boolean}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id038 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id038
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id049
-        - &id041 !!robotbuilder.data.CommandGroupEntry
-          command: *id039
+        default: []
+        name: Commands
+        validators: *id024
+        value:
+        - &id038 !!robotbuilder.data.CommandGroupEntry
+          command: *id036
           hasMatch: true
           order: Sequential
           parameters:
@@ -1443,8 +1462,32 @@ Children:
             validators: null
             value: []
           previous: null
+        - &id040 !!robotbuilder.data.CommandGroupEntry
+          command: *id037
+          hasMatch: true
+          order: Sequential
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value:
+            - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: degreeAngle,
+              type: double, value: '0'}
+          previous: *id038
+        - &id041 !!robotbuilder.data.CommandGroupEntry
+          command: *id039
+          hasMatch: true
+          order: Sequential
+          parameters:
+            default: []
+            name: ParametersProperty
+            validators: null
+            value:
+            - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: travelDist,
+              type: double, value: '0'}
+          previous: *id040
         - &id043 !!robotbuilder.data.CommandGroupEntry
-          command: *id040
+          command: *id037
           hasMatch: true
           order: Sequential
           parameters:
@@ -1455,7 +1498,7 @@ Children:
             - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: degreeAngle,
               type: double, value: '0'}
           previous: *id041
-        - &id044 !!robotbuilder.data.CommandGroupEntry
+        - &id045 !!robotbuilder.data.CommandGroupEntry
           command: *id042
           hasMatch: true
           order: Sequential
@@ -1463,34 +1506,10 @@ Children:
             default: []
             name: ParametersProperty
             validators: null
-            value:
-            - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: travelDist,
-              type: double, value: '0'}
+            value: []
           previous: *id043
-        - &id046 !!robotbuilder.data.CommandGroupEntry
-          command: *id040
-          hasMatch: true
-          order: Sequential
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value:
-            - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: degreeAngle,
-              type: double, value: '0'}
-          previous: *id044
-        - &id048 !!robotbuilder.data.CommandGroupEntry
-          command: *id045
-          hasMatch: true
-          order: Sequential
-          parameters:
-            default: []
-            name: ParametersProperty
-            validators: null
-            value: []
-          previous: *id046
         - !!robotbuilder.data.CommandGroupEntry
-          command: *id047
+          command: *id044
           hasMatch: true
           order: Sequential
           parameters:
@@ -1498,16 +1517,13 @@ Children:
             name: ParametersProperty
             validators: null
             value: []
-          previous: *id048
-        name: Commands
-        validators: *id023
-        value: *id049
+          previous: *id045
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
     Name: AutoDriveOverLowObstacle3_4
   - Children: []
-    Properties: *id050
+    Properties: *id046
     Base: Command
     Name: PusherGoToAngle
   Properties: {}

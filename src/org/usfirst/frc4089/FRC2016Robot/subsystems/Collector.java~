@@ -72,13 +72,13 @@ public class Collector extends Subsystem {
     }
     
     public boolean getCollectorOut(){
-    	return !lSCollectorOut.get();
+    	return lSCollectorOut.get();
     }
     public boolean getCollectorIn(){
-    	return !lSCollectorIn.get();
+    	return lSCollectorIn.get();
     }
     public boolean getCollectorStage(){
-    	return !lSCollectorStage.get();
+    	return lSCollectorStage.get();
     }
 }
 

@@ -53,8 +53,10 @@ public class CollectorRetract extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	boolean stagedCondition = !startedStaged && m_shouldStage && Robot.collector.getCollectorStage();
-    	boolean retractedCondition = startedStaged && Robot.collector.getCollectorIn();
+    	boolean colStage = Robot.collector.getCollectorStage();
+    	boolean colIn = Robot.collector.getCollectorIn();
+    	boolean stagedCondition = !startedStaged && m_shouldStage && colStage;
+    	boolean retractedCondition = (startedStaged || !m_shouldStage) && colIn;
         return stagedCondition || retractedCondition;
     }
 

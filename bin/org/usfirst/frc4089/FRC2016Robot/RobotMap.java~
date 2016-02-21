@@ -48,6 +48,7 @@ public class RobotMap {
     public static DigitalInput barClimbLSBot;
     public static CANTalon barClimbWinchMotor;
     public static Solenoid barClimbRaiseSolenoid;
+    public static Solenoid barClimbStringReleaseSol;
     public static CANTalon collectorMCollectorSlide;
     public static DigitalInput collectorLSCollectorIn;
     public static DigitalInput collectorLSCollectorOut;
@@ -118,6 +119,9 @@ public class RobotMap {
         
         barClimbRaiseSolenoid = new Solenoid(0, 2);
         LiveWindow.addActuator("BarClimb", "RaiseSolenoid", barClimbRaiseSolenoid);
+        
+        barClimbStringReleaseSol = new Solenoid(0, 3);
+        LiveWindow.addActuator("BarClimb", "StringReleaseSol", barClimbStringReleaseSol);
         
         collectorMCollectorSlide = new CANTalon(8);
         LiveWindow.addActuator("Collector", "MCollectorSlide", collectorMCollectorSlide);

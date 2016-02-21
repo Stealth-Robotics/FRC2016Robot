@@ -90,6 +90,7 @@ public class Robot extends IterativeRobot {
     	driveTrain.ShiftHigh();
     	spinShooter.lower();
     	barClimb.lower();
+    	barClimb.grabString();
     	boolean dispose = SmartDashboard.getBoolean("VPDispose");
     	if(dispose)
     	{

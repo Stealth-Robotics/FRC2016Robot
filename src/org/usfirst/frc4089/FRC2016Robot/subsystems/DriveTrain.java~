@@ -111,7 +111,7 @@ public class DriveTrain extends Subsystem {
     
     public void ToggleShifters()
     {
-    	boolean shift = driveShifter.get();
+    	boolean shift = !driveShifter.get();
     	driveShifter.set(shift);
     }
     
