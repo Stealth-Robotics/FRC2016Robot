@@ -90,7 +90,8 @@ public class Robot extends IterativeRobot {
     	driveTrain.ShiftHigh();
     	spinShooter.lower();
     	barClimb.lower();
-    	boolean dispose = SmartDashboard.getBoolean("VPDispose");
+    	barClimb.grabString();
+    	boolean dispose = SmartDashboard.getBoolean("VPDispose", false);
     	if(dispose)
     	{
     		vision.shutdown();
@@ -127,7 +128,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-    	SmartDashboard.putNumber("ShotRPM", spinShooter.getLeftRPMs());
+    	SmartDashboard.putNumber("ShotRPM", spinShooter.getAvgRPMs());
     }
 
     /**
