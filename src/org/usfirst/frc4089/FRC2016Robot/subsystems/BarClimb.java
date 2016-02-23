@@ -53,17 +53,17 @@ public class BarClimb extends Subsystem {
     }
     
     public void ClimbUp(double speed) {
-    	if(lSTop.get()) //limit switch is normally closed. if this is true, set the motor
+    	if(true)//lSTop.get()) //limit switch is normally closed. if this is true, set the motor
     	{
-    		winchMotor.set(speed);
+    		winchMotor.set(-speed);
     	}
     }
     
     public void ClimbDown(double speed)
     {
-    	if(lSBot.get()) //limit switch is normally closed. if this is true, set the motor
+    	if(true)//lSBot.get()) //limit switch is normally closed. if this is true, set the motor
     	{
-    		winchMotor.set(-speed);
+    		winchMotor.set(speed);
     	}
     }
     
@@ -72,11 +72,11 @@ public class BarClimb extends Subsystem {
     }
     
     public void lift() {
-    	raiseSolenoid.set(false);
+    	raiseSolenoid.set(true);
     }
     
     public void lower() {
-    	raiseSolenoid.set(true);
+    	raiseSolenoid.set(false);
     }
     
     public void releaseString()
