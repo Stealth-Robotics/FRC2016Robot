@@ -41,5 +41,8 @@ public class Constants {
 	public static final double anAccelZero = 2.5; // actual value will vary depending on specific device
 	public static final double autoGyroTurn90LT = 1.2; // volt reading at 2.5 normal, +/- 7mV/deg
 	public static final double autoGyroTurn90RT = 3.8; // volt reading at 2.5 normal, +/- 7mV/deg
-
+	public static final double visionAlignThreashold = 0.05;
+	public static final double visionTimerThreashold = 10.0;
+	public static final double rotateDegIncrement = 0.75;
+	
 }

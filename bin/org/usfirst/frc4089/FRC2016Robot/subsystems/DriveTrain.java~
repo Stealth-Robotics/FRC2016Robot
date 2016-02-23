@@ -59,7 +59,7 @@ public class DriveTrain extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
     
-    public void Drive(Joystick j)
+    public void drive(Joystick j)
     {
     	Drive(j.getZ(), j.getY());
     }
@@ -69,12 +69,12 @@ public class DriveTrain extends Subsystem {
     	rDrive.arcadeDrive(pow, turn);
     }
     
-    public boolean DriveToLine()
+    public boolean driveToLine()
     {
     	double l = 0.75, r = 0.75;
-    	ShiftLow();
-    	if(IsLeftLimitTriggered()) l = 0;
-    	if(IsRightLimitTriggered()) r = 0;
+    	shiftLow();
+    	if(isLeftLimitTriggered()) l = 0;
+    	if(isRightLimitTriggered()) r = 0;
     	rDrive.setLeftRightMotorOutputs(l, r);
     	return l == 0 && r == 0;
     }
@@ -85,14 +85,14 @@ public class DriveTrain extends Subsystem {
     	mDrive3.setEncPosition(0);
     }
     
-    public boolean DriveToDist(double distance)
+    public boolean driveToDist(double distance)
     {
-    	return DriveToDist(distance, distance);
+    	return driveToDist(distance, distance);
     }
     
-    public boolean DriveToDist(double left, double right)
+    public boolean driveToDist(double left, double right)
     {
-    	ShiftLow();
+    	shiftLow();
     	double leftDist = mDrive1.getEncPosition();
     	double rightDist = mDrive3.getEncPosition();
     	
@@ -103,34 +103,34 @@ public class DriveTrain extends Subsystem {
     	return leftPow == 0 && rightPow == 0;
     }
     
-    public void Rotate(double rotPow)
+    public void rotate(double rotPow)
     {
-    	ShiftLow();
+    	shiftLow();
     	Drive(rotPow, 0);
     }
     
-    public void ToggleShifters()
+    public void toggleShifters()
     {
     	boolean shift = !driveShifter.get();
     	driveShifter.set(shift);
     }
     
-    public void ShiftLow()
+    public void shiftLow()
     {
     	driveShifter.set(false);
     }
     
-    public void ShiftHigh()
+    public void shiftHigh()
     {
     	driveShifter.set(true);
     }
     
-    public boolean IsLeftLimitTriggered()
+    public boolean isLeftLimitTriggered()
     {
     	return !leftLinePseudoLimit.get();
     }
     
-    public boolean IsRightLimitTriggered()
+    public boolean isRightLimitTriggered()
     {
     	return !rightLinePseudoLimit.get();
     }

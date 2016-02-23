@@ -12,6 +12,8 @@
 package org.usfirst.frc4089.FRC2016Robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc4089.FRC2016Robot.Constants;
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 
 /**
@@ -38,11 +40,12 @@ public class ClimbUp extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.barClimb.releaseString();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.barClimb.ClimbUp(1.0);
+    	Robot.barClimb.climbUp(Constants.climbMotorSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -52,7 +55,7 @@ public class ClimbUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.barClimb.KillMotor();
+    	Robot.barClimb.killMotor();
     }
 
     // Called when another command which requires one or more of the same

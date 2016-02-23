@@ -14,6 +14,8 @@ package org.usfirst.frc4089.FRC2016Robot.commands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc4089.FRC2016Robot.Constants;
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 
 /**
@@ -56,7 +58,7 @@ public class ClimbDown extends Command {
     protected void execute() {
     	if(canRun)
     	{
-    		Robot.barClimb.ClimbDown(1.0);
+    		Robot.barClimb.climbDown(Constants.climbMotorSpeed);
     	}
     }
 
@@ -67,7 +69,7 @@ public class ClimbDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.barClimb.KillMotor();
+    	Robot.barClimb.killMotor();
     	Robot.barClimb.grabString();
     }
 

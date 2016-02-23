@@ -12,6 +12,8 @@
 package org.usfirst.frc4089.FRC2016Robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc4089.FRC2016Robot.Constants;
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 
 /**
@@ -43,7 +45,7 @@ public class Rotate extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.Rotate(0.75);
+    	Robot.driveTrain.rotate(Constants.rotateDegIncrement);
     }
 
     // Make this return true when this Command no longer needs to run execute()

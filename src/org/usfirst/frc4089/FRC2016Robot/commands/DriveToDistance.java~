@@ -47,7 +47,7 @@ public class DriveToDistance extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isDone = Robot.driveTrain.DriveToDist(m_travelDist);
+    	isDone = Robot.driveTrain.driveToDist(m_travelDist);
     }
 
     // Make this return true when this Command no longer needs to run execute()

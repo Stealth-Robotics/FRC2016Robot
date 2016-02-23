@@ -12,6 +12,8 @@
 package org.usfirst.frc4089.FRC2016Robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc4089.FRC2016Robot.Constants;
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 import org.usfirst.frc4089.FRC2016Robot.Util.ClassifiedScore;
 import org.usfirst.frc4089.FRC2016Robot.Util.ScoreCollection;
@@ -50,7 +52,7 @@ public class AlignToVision extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveTrain.ShiftLow();
+    	Robot.driveTrain.shiftLow();
     	_isAligned = false;
     	elapsedTime = 0;
     	timer = 0;
@@ -61,7 +63,7 @@ public class AlignToVision extends Command {
     	elapsedTime = timeSinceInitialized() - timer;
     	timer += elapsedTime;
     	//track total runtime. terminate if we've tried for over 2 seconds
-    	if(timer >= 10.0)
+    	if(timer >= Constants.visionTimerThreashold)
     	{
     		_isAligned = true;
     		return;
@@ -70,7 +72,7 @@ public class AlignToVision extends Command {
 		if(scores == null) return;
 		ClassifiedScore best = scores.getBestTarget();
 		if(best == null) return;
-		if(Math.abs(best.AimingPos.x) < 0.05)
+		if(Math.abs(best.AimingPos.x) < Constants.visionAlignThreashold)
 		{
 			_isAligned = true;
 			return;

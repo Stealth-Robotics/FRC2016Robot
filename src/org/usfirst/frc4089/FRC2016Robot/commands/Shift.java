@@ -42,7 +42,7 @@ public class Shift extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.ToggleShifters();
+    	Robot.driveTrain.toggleShifters();
     }
 
     // Make this return true when this Command no longer needs to run execute()

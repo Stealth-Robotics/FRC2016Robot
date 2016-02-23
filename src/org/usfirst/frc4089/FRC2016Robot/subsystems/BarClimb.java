@@ -52,14 +52,14 @@ public class BarClimb extends Subsystem {
         // setDefaultCommand(new MySpecialCommand());
     }
     
-    public void ClimbUp(double speed) {
+    public void climbUp(double speed) {
     	if(lSTop.get()) //limit switch is normally closed. if this is true, set the motor
     	{
     		winchMotor.set(speed);
     	}
     }
     
-    public void ClimbDown(double speed)
+    public void climbDown(double speed)
     {
     	if(lSBot.get()) //limit switch is normally closed. if this is true, set the motor
     	{
@@ -67,7 +67,7 @@ public class BarClimb extends Subsystem {
     	}
     }
     
-    public void KillMotor() {
+    public void killMotor() {
     	winchMotor.set(0);
     }
     

@@ -12,6 +12,8 @@
 package org.usfirst.frc4089.FRC2016Robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc4089.FRC2016Robot.Constants;
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 
 /**
@@ -42,7 +44,7 @@ public class CollectorExtend extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.collector.extendCollector(1.0);
+    	Robot.collector.extendCollector(Constants.collectorActuationSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

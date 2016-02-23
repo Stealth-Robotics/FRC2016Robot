@@ -45,7 +45,7 @@ public class DriveToLine extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	isDone = Robot.driveTrain.DriveToLine();
+    	isDone = Robot.driveTrain.driveToLine();
     }
 
     // Make this return true when this Command no longer needs to run execute()
