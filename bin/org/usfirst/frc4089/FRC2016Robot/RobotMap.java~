@@ -86,7 +86,7 @@ public class RobotMap {
         
         driveTrainRDrive.setSafetyEnabled(true);
         driveTrainRDrive.setExpiration(0.1);
-        driveTrainRDrive.setSensitivity(0.5);
+        driveTrainRDrive.setSensitivity(0.2);
         driveTrainRDrive.setMaxOutput(1.0);
 
         driveTrainDriveShifter = new Solenoid(0, 0);

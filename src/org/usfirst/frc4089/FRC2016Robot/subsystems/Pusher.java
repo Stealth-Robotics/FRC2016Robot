@@ -40,6 +40,8 @@ public class Pusher extends Subsystem {
     
     private PIDController pid;
     private boolean isManualDriveAllowed;
+    private static final double kScaleNativeToDegree = 270.0 / 1023.0;
+    private static final double kScaleDegreeToNative = 1023.0 / 270.0;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -57,6 +59,7 @@ public class Pusher extends Subsystem {
 		pid.setSetpoint(0);*/
         liftAngleDriver.setPID(0.05, 0, 0);
         liftAngleDriver.setPIDSourceType(PIDSourceType.kDisplacement);
+        liftAngleDriver.setAllowableClosedLoopErr((int)kScaleDegreeToNative);
         liftAngleDriver.setFeedbackDevice(FeedbackDevice.AnalogPot);
         setTargetPos(0);
 		
@@ -70,22 +73,22 @@ public class Pusher extends Subsystem {
     {
     	//pid.setSetpoint(angle);
     	//0-270 -> 0-1023
-    	double talonNativePerDegree = 1023.0 / 270.0;
-    	liftAngleDriver.setSetpoint(angle * talonNativePerDegree);
+    	liftAngleDriver.setSetpoint(angle * kScaleDegreeToNative);
     }
     
     public double potValue(){
 	  	//return liftPoten.get();
-    	return liftAngleDriver.getAnalogInRaw() * 270.0 / 1023.0;
+    	return liftAngleDriver.getAnalogInRaw() * kScaleNativeToDegree;
     }
 	public void articulateDown(double speed){
-		if(potValue() >= 0.1)
+		double potValue = potValue();
+		if(potValue <= 220)
 		{
 			liftAngleDriver.set(speed);
 		}
 	}
 	public void articulateUp(double speed){
-		if(potValue() <= 269.9)
+		if(potValue() >= 80)
 		{
 			liftAngleDriver.set(speed);
 		}
@@ -93,8 +96,8 @@ public class Pusher extends Subsystem {
 	
 	public void PIDDriveToSetpoint()
 	{
-		SmartDashboard.putNumber("PotAngle", potValue());
     	SmartDashboard.putNumber("PIDCurPow", liftAngleDriver.getOutputVoltage());
+    	SmartDashboard.putNumber("PIDErr", liftAngleDriver.getClosedLoopError() * kScaleNativeToDegree);
 		/*if(!pid.isEnabled())
 		{
 			pid.enable();
@@ -102,7 +105,6 @@ public class Pusher extends Subsystem {
     	if(liftAngleDriver.getControlMode() != TalonControlMode.Position)
     	{
     		liftAngleDriver.changeControlMode(TalonControlMode.Position);
-    		liftAngleDriver.enableControl();
     	}
 		isManualDriveAllowed = false;
 	}
@@ -114,7 +116,6 @@ public class Pusher extends Subsystem {
 	{
 		//pid.disable();
 		liftAngleDriver.changeControlMode(TalonControlMode.PercentVbus);
-		liftAngleDriver.disableControl();
 		isManualDriveAllowed = true;
 	}
 	

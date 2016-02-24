@@ -50,21 +50,23 @@ public class PusherManageDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putBoolean("PIDDrive", false);
+		SmartDashboard.putNumber("PotAngle", Robot.pusher.potValue());
     	double yAxis = Robot.oi.getUtilJS().getY() * 0.75;
     	if(Math.abs(yAxis) >= 0.1)
     	{
-    		Robot.pusher.endPIDDrive();
+    		//Robot.pusher.endPIDDrive();
     		Robot.pusher.drive(yAxis);
     		wasDriving = true;
     	}
     	else
     	{
-    		if(wasDriving)
+    		Robot.pusher.drive(0);
+    		/*if(wasDriving)
     		{
     			wasDriving = false;
     			savedSetpoint = Robot.pusher.potValue();
     		}
-    		Robot.pusher.PIDDriveToSetpoint();
+    		Robot.pusher.PIDDriveToSetpoint();*/
     	}
     }
 

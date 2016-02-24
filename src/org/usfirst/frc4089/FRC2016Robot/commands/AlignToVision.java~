@@ -61,21 +61,21 @@ public class AlignToVision extends Command {
     	elapsedTime = timeSinceInitialized() - timer;
     	timer += elapsedTime;
     	//track total runtime. terminate if we've tried for over 2 seconds
-    	if(timer >= 10.0)
+    	/*if(timer >= 10.0)
     	{
     		_isAligned = true;
     		return;
-    	}
+    	}*/
     	ScoreCollection scores = VisionRunnable.getThreadSafeScore();
 		if(scores == null) return;
 		ClassifiedScore best = scores.getBestTarget();
 		if(best == null) return;
-		if(Math.abs(best.AimingPos.x) < 0.05)
+		if(Math.abs(best.AimingPos.x) < 0.15)
 		{
 			_isAligned = true;
 			return;
 		}
-    	double turnPow = -best.AimingPos.x;//-1 to +1. how convenient.
+    	double turnPow = best.AimingPos.x;//-1 to +1. how convenient.
     	Robot.driveTrain.Drive(turnPow, 0);
     }
 
