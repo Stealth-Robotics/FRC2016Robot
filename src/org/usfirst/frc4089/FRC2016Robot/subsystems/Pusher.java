@@ -57,7 +57,7 @@ public class Pusher extends Subsystem {
         pid.setInputRange(0, 270);
         pid.setOutputRange(-1.0, 1.0);
 		pid.setSetpoint(0);*/
-        liftAngleDriver.setPID(0.05, 0, 0);
+        liftAngleDriver.setPID(0.4, 0, 0);
         liftAngleDriver.setPIDSourceType(PIDSourceType.kDisplacement);
         liftAngleDriver.setAllowableClosedLoopErr((int)kScaleDegreeToNative);
         liftAngleDriver.setFeedbackDevice(FeedbackDevice.AnalogPot);
@@ -82,13 +82,13 @@ public class Pusher extends Subsystem {
     }
 	public void articulateDown(double speed){
 		double potValue = potValue();
-		if(potValue <= 220)
+		if(potValue < 220)
 		{
 			liftAngleDriver.set(speed);
 		}
 	}
 	public void articulateUp(double speed){
-		if(potValue() >= 80)
+		if(potValue() > 0)
 		{
 			liftAngleDriver.set(speed);
 		}
@@ -102,10 +102,13 @@ public class Pusher extends Subsystem {
 		{
 			pid.enable();
 		}*/
-    	if(liftAngleDriver.getControlMode() != TalonControlMode.Position)
+    	TalonControlMode mode = liftAngleDriver.getControlMode();
+    	if(mode != TalonControlMode.Position)
     	{
     		liftAngleDriver.changeControlMode(TalonControlMode.Position);
+        	liftAngleDriver.reverseOutput(true);
     	}
+    	liftAngleDriver.set(liftAngleDriver.getSetpoint());
 		isManualDriveAllowed = false;
 	}
 	public boolean isPIDDone()
@@ -116,6 +119,7 @@ public class Pusher extends Subsystem {
 	{
 		//pid.disable();
 		liftAngleDriver.changeControlMode(TalonControlMode.PercentVbus);
+		liftAngleDriver.reverseOutput(false);
 		isManualDriveAllowed = true;
 	}
 	

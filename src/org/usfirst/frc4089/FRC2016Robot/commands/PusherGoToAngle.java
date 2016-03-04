@@ -48,6 +48,7 @@ public class PusherGoToAngle extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	SmartDashboard.putBoolean("PIDDrive", true);
+		SmartDashboard.putNumber("PotAngle", Robot.pusher.potValue());
     	Robot.pusher.PIDDriveToSetpoint();
     }
 
