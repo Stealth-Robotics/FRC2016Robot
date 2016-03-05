@@ -57,9 +57,9 @@ public class Pusher extends Subsystem {
         pid.setInputRange(0, 270);
         pid.setOutputRange(-1.0, 1.0);
 		pid.setSetpoint(0);*/
-        liftAngleDriver.setPID(0.4, 0, 0);
+        liftAngleDriver.setPID(2.25, 0.00075, 0.175);
         liftAngleDriver.setPIDSourceType(PIDSourceType.kDisplacement);
-        liftAngleDriver.setAllowableClosedLoopErr((int)kScaleDegreeToNative);
+        liftAngleDriver.setAllowableClosedLoopErr((int)(5 * kScaleDegreeToNative));
         liftAngleDriver.setFeedbackDevice(FeedbackDevice.AnalogPot);
         setTargetPos(0);
 		
@@ -82,15 +82,24 @@ public class Pusher extends Subsystem {
     }
 	public void articulateDown(double speed){
 		double potValue = potValue();
-		if(potValue < 220)
+		//allow 5deg error
+		if(potValue < 268)
 		{
 			liftAngleDriver.set(speed);
 		}
+		else
+		{
+			stop();
+		}
 	}
 	public void articulateUp(double speed){
-		if(potValue() > 0)
+		if(potValue() > 2)
 		{
 			liftAngleDriver.set(speed);
+		}
+		else
+		{
+			stop();
 		}
 	}
 	
@@ -126,7 +135,7 @@ public class Pusher extends Subsystem {
 	public void drive(double speed)
 	{
 		if(!isManualDriveAllowed) return;
-		speed *= -1;
+		speed *= 0.5;
 		if(speed > 0)
 		{
 			articulateUp(speed);
