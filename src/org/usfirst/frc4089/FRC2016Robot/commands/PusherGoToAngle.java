@@ -54,6 +54,7 @@ public class PusherGoToAngle extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if(timeSinceInitialized() < 0.25) return false; //give time to start
         return Robot.pusher.isPIDDone();
     }
 

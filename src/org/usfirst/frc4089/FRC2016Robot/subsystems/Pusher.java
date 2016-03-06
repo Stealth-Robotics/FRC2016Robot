@@ -40,8 +40,9 @@ public class Pusher extends Subsystem {
     
     private PIDController pid;
     private boolean isManualDriveAllowed;
-    private static final double kScaleNativeToDegree = 270.0 / 1023.0;
-    private static final double kScaleDegreeToNative = 1023.0 / 270.0;
+    private static final double kScaleNativeToDegree = 200.0 / 1023.0;
+    private static final double kScaleDegreeToNative = 1023.0 / 200.0;
+    private static final int kAllowableError = (int)(Math.round(10 * kScaleDegreeToNative));
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -59,7 +60,7 @@ public class Pusher extends Subsystem {
 		pid.setSetpoint(0);*/
         liftAngleDriver.setPID(2.25, 0.00075, 0.175);
         liftAngleDriver.setPIDSourceType(PIDSourceType.kDisplacement);
-        liftAngleDriver.setAllowableClosedLoopErr((int)(5 * kScaleDegreeToNative));
+        liftAngleDriver.setAllowableClosedLoopErr(kAllowableError);
         liftAngleDriver.setFeedbackDevice(FeedbackDevice.AnalogPot);
         setTargetPos(0);
 		
@@ -83,7 +84,7 @@ public class Pusher extends Subsystem {
 	public void articulateDown(double speed){
 		double potValue = potValue();
 		//allow 5deg error
-		if(potValue < 268)
+		if(potValue < 198)
 		{
 			liftAngleDriver.set(speed);
 		}
@@ -116,13 +117,21 @@ public class Pusher extends Subsystem {
     	{
     		liftAngleDriver.changeControlMode(TalonControlMode.Position);
         	liftAngleDriver.reverseOutput(true);
+        	liftAngleDriver.clearIAccum();
     	}
     	liftAngleDriver.set(liftAngleDriver.getSetpoint());
 		isManualDriveAllowed = false;
 	}
 	public boolean isPIDDone()
 	{
-		return false;//liftAngleDriver.isAlive();//Math.abs(pid.getError()) < 1;
+		double closedLoopErr = Math.abs(liftAngleDriver.getClosedLoopError());
+		double vPow = Math.abs(liftAngleDriver.getOutputVoltage());
+		if(vPow < 1.0 && closedLoopErr < kAllowableError)
+		{
+			return true;
+		}
+		
+		return false;
 	}
 	public void endPIDDrive()
 	{
