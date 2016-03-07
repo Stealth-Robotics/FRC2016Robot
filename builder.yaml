@@ -1204,35 +1204,6 @@ Children:
                         value: *id025
                       supports: {}
                       type: Command
-                    name: ShooterRaise
-                    properties: &id040
-                      Parameters: !!robotbuilder.data.properties.ParametersProperty
-                        default: []
-                        name: Parameters
-                        validators: null
-                        value: []
-                      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {
-                        default: None, name: Requires, type: Subsystem, validators: null,
-                        value: SpinShooter}
-                      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-                        default: []
-                        name: Parameter presets
-                        validators: null
-                        value: []
-                      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
-                        default: true, name: Button on SmartDashboard, validators: null,
-                        value: true}
-                  hasMatch: true
-                  order: Sequential
-                  parameters:
-                    default: []
-                    name: ParametersProperty
-                    validators: null
-                    value: []
-                  previous: null
-                - &id029 !!robotbuilder.data.CommandGroupEntry
-                  command:
-                    base: *id026
                     name: PusherGoToAngle
                     properties: &id054
                       Parameters: !!robotbuilder.data.properties.ParametersProperty
@@ -1262,6 +1233,35 @@ Children:
                     value:
                     - !!robotbuilder.data.properties.ValuedParameterDescriptor {name: angle,
                       type: double, value: '0'}
+                  previous: null
+                - &id029 !!robotbuilder.data.CommandGroupEntry
+                  command:
+                    base: *id026
+                    name: ShooterRaise
+                    properties: &id040
+                      Parameters: !!robotbuilder.data.properties.ParametersProperty
+                        default: []
+                        name: Parameters
+                        validators: null
+                        value: []
+                      Requires: !!robotbuilder.data.properties.TypeSelectionProperty {
+                        default: None, name: Requires, type: Subsystem, validators: null,
+                        value: SpinShooter}
+                      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+                        default: []
+                        name: Parameter presets
+                        validators: null
+                        value: []
+                      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {
+                        default: true, name: Button on SmartDashboard, validators: null,
+                        value: true}
+                  hasMatch: true
+                  order: Sequential
+                  parameters:
+                    default: []
+                    name: ParametersProperty
+                    validators: null
+                    value: []
                   previous: *id027
                 - !!robotbuilder.data.CommandGroupEntry
                   command:

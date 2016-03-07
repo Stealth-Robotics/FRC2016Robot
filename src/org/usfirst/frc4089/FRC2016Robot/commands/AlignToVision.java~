@@ -81,7 +81,7 @@ public class AlignToVision extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return _isAligned;
+        return _isAligned || timer > 2.5;
     }
 
     // Called once after isFinished returns true

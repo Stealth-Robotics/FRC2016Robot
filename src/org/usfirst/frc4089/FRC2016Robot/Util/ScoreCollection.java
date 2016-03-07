@@ -47,7 +47,7 @@ public class ScoreCollection implements Comparator<ClassifiedScore> {
 	
 	public void Send()
 	{
-		Filter(45, 45, 60, 0);
+		Filter(20.75, 37.5, 70, 0);
 		scores.sort(this);
 		for(int i = 0; i < 3; i++)
 		{
