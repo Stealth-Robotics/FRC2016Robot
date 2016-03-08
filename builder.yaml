@@ -859,7 +859,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '11'
+          value: '6'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
@@ -873,7 +873,7 @@ Children:
           validators: null
           value: whenPressed
       Base: Joystick Button
-      Name: Joystick Button 1
+      Name: PusherMove180
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: *id013
@@ -1320,7 +1320,7 @@ Children:
                       - !!robotbuilder.data.properties.ListProperty
                         default: &id030 []
                         name: Commands
-                        validators: *id024
+                        validators: [List]
                         value: *id030
                       - !!robotbuilder.data.properties.ParametersProperty
                         default: []
