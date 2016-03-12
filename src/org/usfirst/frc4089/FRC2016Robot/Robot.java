@@ -105,6 +105,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
+    	autonomousCommand = AutoOptions.getAutoCommandFromString(SmartDashboard.getString("SelectedAuto", ""));
         if (autonomousCommand != null) autonomousCommand.start();
     }
 

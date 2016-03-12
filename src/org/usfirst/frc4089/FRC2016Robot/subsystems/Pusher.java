@@ -40,8 +40,9 @@ public class Pusher extends Subsystem {
     
     private PIDController pid;
     private boolean isManualDriveAllowed;
-    private static final double kScaleNativeToDegree = 200.0 / 1023.0;
-    private static final double kScaleDegreeToNative = 1023.0 / 200.0;
+    private static final double maxAngle = 270;
+    private static final double kScaleNativeToDegree = maxAngle / 1023.0;
+    private static final double kScaleDegreeToNative = 1023.0 / maxAngle;
     private static final int kAllowableError = (int)(Math.round(10 * kScaleDegreeToNative));
 
     // Put methods for controlling this subsystem
@@ -84,7 +85,7 @@ public class Pusher extends Subsystem {
 	public void articulateDown(double speed){
 		double potValue = potValue();
 		//allow 5deg error
-		if(potValue < 198)
+		if(potValue < maxAngle - 2)
 		{
 			liftAngleDriver.set(speed);
 		}
