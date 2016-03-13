@@ -82,9 +82,9 @@ public class OI {
         collectorOutRoller.whileHeld(new CollectorWheelOut());
         collecterInRoller = new JoystickButton(utilJS, 1);
         collecterInRoller.whileHeld(new CollectorWheelIn());
-        collectorRetractor = new JoystickButton(utilJS, 2);
+        collectorRetractor = new JoystickButton(utilJS, 3);
         collectorRetractor.whenPressed(new CollectorRetract(true));
-        collectorExtender = new JoystickButton(utilJS, 3);
+        collectorExtender = new JoystickButton(utilJS, 2);
         collectorExtender.whenPressed(new CollectorExtend());
         driveJS = new Joystick(0);
         
