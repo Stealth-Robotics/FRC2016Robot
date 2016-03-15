@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -44,6 +45,7 @@ public class RobotMap {
     public static CANTalon spinShooterRightSpin;
     public static RobotDrive spinShooterShotDrive;
     public static Solenoid spinShooterSpinShooterElevate;
+    public static Relay spinShooterBlindingDevice;
     public static DigitalInput barClimbLSTop;
     public static DigitalInput barClimbLSBot;
     public static CANTalon barClimbWinchMotor;
@@ -107,6 +109,9 @@ public class RobotMap {
 
         spinShooterSpinShooterElevate = new Solenoid(0, 1);
         LiveWindow.addActuator("SpinShooter", "SpinShooterElevate", spinShooterSpinShooterElevate);
+        
+        spinShooterBlindingDevice = new Relay(0);
+        LiveWindow.addActuator("SpinShooter", "BlindingDevice", spinShooterBlindingDevice);
         
         barClimbLSTop = new DigitalInput(4);
         LiveWindow.addSensor("BarClimb", "LSTop", barClimbLSTop);
