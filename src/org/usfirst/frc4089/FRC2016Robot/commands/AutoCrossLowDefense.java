@@ -2,6 +2,7 @@ package org.usfirst.frc4089.FRC2016Robot.commands;
 
 import org.usfirst.frc4089.FRC2016Robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoCrossLowDefense extends Command {
 
+	double waitTime = 6.0;
     public AutoCrossLowDefense() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -17,17 +19,20 @@ public class AutoCrossLowDefense extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Timer.delay(waitTime);
     	Robot.driveTrain.ShiftLow();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+        //Delay ourDelay = new Delay();
+        //ourDelay.wait(5000);
     	Robot.driveTrain.Drive(0, -1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return timeSinceInitialized() > 1.15;
+        return timeSinceInitialized() > 1.45 + waitTime;
     }
 
     // Called once after isFinished returns true
