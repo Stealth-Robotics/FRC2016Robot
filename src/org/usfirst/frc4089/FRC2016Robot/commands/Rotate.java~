@@ -39,11 +39,12 @@ public class Rotate extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.sensors.resetGyro();
+    	Robot.driveTrain.ShiftLow();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.Rotate(0.75);
+    	Robot.driveTrain.Rotate(0.75 * Math.signum(m_degreeAngle));
     }
 
     // Make this return true when this Command no longer needs to run execute()

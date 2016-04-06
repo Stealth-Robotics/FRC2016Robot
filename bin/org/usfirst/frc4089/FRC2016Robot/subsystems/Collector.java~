@@ -61,11 +61,11 @@ public class Collector extends Subsystem {
     	mCollectorSlide.set(0);
     }
     public void runCollectorWheelsIn(double speed){
-    	collectorMotor.set(speed);
+    	collectorMotor.set(-speed);
     }
     
     public void runCollectorWheelsOut(double speed){
-    	collectorMotor.set(-speed);
+    	collectorMotor.set(speed);
     }
     public void stopCollectorWheels(){
     	collectorMotor.set(0);

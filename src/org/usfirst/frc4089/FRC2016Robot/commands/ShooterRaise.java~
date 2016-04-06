@@ -42,6 +42,7 @@ public class ShooterRaise extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//if(Robot.pusher.potValue() < 45) return;
     	Robot.spinShooter.lift();
     }
 

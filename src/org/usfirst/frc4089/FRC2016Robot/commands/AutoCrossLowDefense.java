@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoCrossLowDefense extends Command {
 
-	double waitTime = 6.0;
+	double waitTime = 10.0;
     public AutoCrossLowDefense() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -31,7 +31,7 @@ public class AutoCrossLowDefense extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return timeSinceInitialized() > 2.0 + waitTime;
+        return timeSinceInitialized() > 2.45 + waitTime;
     }
 
     // Called once after isFinished returns true

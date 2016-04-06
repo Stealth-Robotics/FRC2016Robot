@@ -62,9 +62,9 @@ public class OI {
     public JoystickButton collectorRetractor;
     public JoystickButton collecterInRoller;
     public JoystickButton collectorOutRoller;
-    public JoystickButton pusherMove180;
+    public JoystickButton altRaise;
     public JoystickButton shooterRaiser;
-    public JoystickButton whenPressed;
+    public JoystickButton shooterLowerer;
     public JoystickButton spin;
     public JoystickButton automatedShot;
     public JoystickButton blindyButton;
@@ -77,21 +77,21 @@ public class OI {
 
         utilJS = new Joystick(1);
         
-        blindyButton = new JoystickButton(utilJS, 7);
+        blindyButton = new JoystickButton(utilJS, 10);
         blindyButton.whenPressed(new ToggleAimingLight());
-        automatedShot = new JoystickButton(utilJS, 6);
+        automatedShot = new JoystickButton(utilJS, 8);
         automatedShot.whenPressed(new AutoShoot());
-        spin = new JoystickButton(utilJS, 9);
+        spin = new JoystickButton(utilJS, 1);
         spin.whileHeld(new Shoot());
-        whenPressed = new JoystickButton(utilJS, 10);
-        whenPressed.whenPressed(new ShooterLower());
-        shooterRaiser = new JoystickButton(utilJS, 11);
+        shooterLowerer = new JoystickButton(utilJS, 7);
+        shooterLowerer.whenPressed(new ShooterLower());
+        shooterRaiser = new JoystickButton(utilJS, 6);
         shooterRaiser.whenPressed(new ShooterRaise());
-        pusherMove180 = new JoystickButton(utilJS, 8);
-        pusherMove180.whenPressed(new PusherGoToAngle(180.0));
-        collectorOutRoller = new JoystickButton(utilJS, 4);
+        altRaise = new JoystickButton(utilJS, 9);
+        altRaise.whenPressed(new ShooterRaise());
+        collectorOutRoller = new JoystickButton(utilJS, 5);
         collectorOutRoller.whileHeld(new CollectorWheelOut());
-        collecterInRoller = new JoystickButton(utilJS, 1);
+        collecterInRoller = new JoystickButton(utilJS, 4);
         collecterInRoller.whileHeld(new CollectorWheelIn());
         collectorRetractor = new JoystickButton(utilJS, 3);
         collectorRetractor.whenPressed(new CollectorRetract(true));
