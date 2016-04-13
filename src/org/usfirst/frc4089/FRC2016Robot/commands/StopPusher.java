@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FeedBallToBumper extends Command {
+public class StopPusher extends Command {
 
-    public FeedBallToBumper() {
+    public StopPusher() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.collector);
+    	requires(Robot.pusher);
     }
 
     // Called just before this Command runs the first time
@@ -21,26 +21,17 @@ public class FeedBallToBumper extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timeSinceInitialized() <= 1.75)
-    	{
-    		Robot.collector.extendCollector(1);
-    	}
-    	else
-    	{
-    		Robot.collector.stopCollector();
-    	}
-    	Robot.collector.runCollectorWheelsOut(1);
+    	Robot.pusher.drive(0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return timeSinceInitialized() > 4.25;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stopCollector();
-    	Robot.collector.stopCollectorWheels();
+    	Robot.pusher.drive(0);
     }
 
     // Called when another command which requires one or more of the same

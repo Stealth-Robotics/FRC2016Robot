@@ -49,8 +49,9 @@ public class Rotate extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	boolean areSignsEqual = Math.signum(m_degreeAngle) == Math.signum(Robot.sensors.getAngle());
-    	boolean absComp = Math.abs(Robot.sensors.getAngle()) >= Math.abs(m_degreeAngle);
+    	double robotAngle = Robot.sensors.getAngle();
+    	boolean areSignsEqual = Math.signum(m_degreeAngle) == Math.signum(robotAngle) && robotAngle != 0;
+    	boolean absComp = Math.abs(robotAngle) >= Math.abs(m_degreeAngle);
         return areSignsEqual && absComp;
     }
 

@@ -7,44 +7,40 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class FeedBallToBumper extends Command {
+public class RotateIndef extends Command {
 
-    public FeedBallToBumper() {
+	private double rotation;
+	
+    public RotateIndef(double power) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.collector);
+    	requires(Robot.driveTrain);
+    	rotation = power;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveTrain.ShiftLow();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(timeSinceInitialized() <= 1.75)
-    	{
-    		Robot.collector.extendCollector(1);
-    	}
-    	else
-    	{
-    		Robot.collector.stopCollector();
-    	}
-    	Robot.collector.runCollectorWheelsOut(1);
+    	Robot.driveTrain.Drive(rotation, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return timeSinceInitialized() > 4.25;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.collector.stopCollector();
-    	Robot.collector.stopCollectorWheels();
+    	Robot.driveTrain.Drive(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	end();
     }
 }

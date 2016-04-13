@@ -57,7 +57,7 @@ public class CollectorRetract extends Command {
     	boolean colStage = Robot.collector.getCollectorStage();
     	boolean colIn = Robot.collector.getCollectorIn();
     	boolean stagedCondition = !startedStaged && m_shouldStage && colStage;
-    	boolean retractedCondition = (startedStaged || !m_shouldStage) && colIn;
+    	boolean retractedCondition = colIn;
         return stagedCondition || retractedCondition;
     }
 

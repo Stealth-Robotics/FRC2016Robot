@@ -50,10 +50,11 @@ public class AutoShoot extends CommandGroup {
         addSequential(new Delay(0.25));
         addSequential(new ShooterLower());*/
     	
-    	addSequential(new MoveFingerUp(true));
+    	//addSequential(new MoveFingerUp(true));
     	addParallel(new PusherGoToBottomLimit());
     	addParallel(new CollectorExtend());
-    	addSequential(new Delay(0.75));
+    	addSequential(new Delay(0.5));
+    	addSequential(new StopPusher());
     	addSequential(new ShooterRaise());
     	addSequential(new Delay(0.25));
     	addSequential(new ShooterLower());

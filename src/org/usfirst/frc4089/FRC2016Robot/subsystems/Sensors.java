@@ -15,6 +15,7 @@ import org.usfirst.frc4089.FRC2016Robot.RobotMap;
 import org.usfirst.frc4089.FRC2016Robot.Util.NSSensors;
 import org.usfirst.frc4089.FRC2016Robot.commands.*;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
